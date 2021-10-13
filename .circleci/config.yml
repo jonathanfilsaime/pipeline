@@ -44,6 +44,16 @@ jobs:
           name: "print world"
           command: "echo print world!"
 
+  print_env_variable:
+    docker:
+      - image: cimg/base:stable
+    
+    steps:
+      - checkout 
+      - run:
+          name: "print env variable"
+          command: echo $MY_ENV_1
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -55,3 +65,4 @@ workflows:
           requires:
           - say-hello
       - print_world
+      - print_env_variable
