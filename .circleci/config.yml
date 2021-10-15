@@ -25,8 +25,6 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - print_pipeline_id:
-          to: "joncdsocndosncosnos"
       - run:
           name: "Say hello"
           command: echo "Hello, World!"
@@ -40,7 +38,6 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - print_pipeline_id
       - run:
           name: "print hello"
           command: echo "print hello!"
@@ -54,7 +51,6 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - print_pipeline_id
       - run:
           name: "print world"
           command: echo "print world!"
@@ -64,7 +60,6 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout 
-      - print_pipeline_id
       - run:
           name: "print env variable"
           command: echo $MY_ENV_2
@@ -74,7 +69,6 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout 
-      - print_pipeline_id
       - run:
           name: "save hello world output"
           command: echo "hello world" > output.txt
@@ -88,12 +82,19 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout 
-      - print_pipeline_id
       - attach_workspace:
           at: .
       - run:
           name: "print output file"
           command: cat output.txt
+
+  pipeline_id:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout 
+      - print_pipeline_id:
+          to: $CIRCLE_WORKFLOW_ID
       
 
 # Invoke jobs via workflows
@@ -102,6 +103,7 @@ workflows:
   version: 2
   say-hello-workflow:
     jobs:
+      - print_output_file 
       - say-hello
       - print_hello:
           requires:
