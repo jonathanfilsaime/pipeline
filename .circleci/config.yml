@@ -62,7 +62,7 @@ jobs:
           name: "save hello world output"
           command: echo "hello world" > output.txt
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: /root/project
           paths:
             - target/output.txt
 
@@ -72,7 +72,7 @@ jobs:
     steps:
       - checkout 
       - attach_workspace:
-          at: /tmp/workspace
+          at: /root/project
       - run:
           name: "print output file"
           command: cat output.txt
