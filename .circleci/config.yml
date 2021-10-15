@@ -103,7 +103,7 @@ workflows:
   version: 2
   say-hello-workflow:
     jobs:
-      - print_output_file 
+      - pipeline_id 
       - say-hello
       - print_hello:
           requires:
