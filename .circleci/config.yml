@@ -62,9 +62,9 @@ jobs:
           name: "save hello world output"
           command: echo "hello world" > output.txt
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: .
           paths:
-            - target/output.txt
+              - ./output.txt
 
   print_output_file:
     docker:
@@ -72,10 +72,10 @@ jobs:
     steps:
       - checkout 
       - attach_workspace:
-          at: /tmp/workspace
+          at: .
       - run:
           name: "print output file"
-          command: cd target && cat output.txt
+          command: cat output.txt
       
 
 # Invoke jobs via workflows
