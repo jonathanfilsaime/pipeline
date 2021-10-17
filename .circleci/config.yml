@@ -95,6 +95,19 @@ jobs:
       - checkout 
       - print_pipeline_id:
           to: $CIRCLE_WORKFLOW_ID
+  
+  divide_by_zero:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout 
+      - run:
+          name: "divide by zero"
+          command: 1/0
+      - run:
+          name: "when fail"
+          command: echo "FAIL MATE"
+          when: on_fail
       
 
 # Invoke jobs via workflows
@@ -114,3 +127,4 @@ workflows:
       - print_output_file:
           requires:
           - save_hello_world_output
+      - divide_by_zero
