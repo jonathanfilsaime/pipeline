@@ -2,129 +2,174 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-commands:
-  print_pipeline_id:
-    description: "print pipeline id"
-    parameters:
-      to:
-        default: "world"
-        type: string
-    steps:
-      - run: echo <<parameters.to>>
+# commands:
+#   print_pipeline_id:
+#     description: "print pipeline id"
+#     parameters:
+#       to:
+#         default: "world"
+#         type: string
+#     steps:
+#       - run: echo <<parameters.to>>
 
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: echo "Hello, World!"
+  # say-hello:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: cimg/base:stable
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Say hello"
+  #         command: echo "Hello, World!"
 
-  print_hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "print hello"
-          command: echo "print hello!"
+  # print_hello:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: cimg/base:stable
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "print hello"
+  #         command: echo "print hello!"
 
-  print_world:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "print world"
-          command: echo "print world!"
+  # print_world:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: cimg/base:stable
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "print world"
+  #         command: echo "print world!"
 
-  print_env_variable:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout 
-      - run:
-          name: "print env variable"
-          command: echo $MY_ENV_2
+  # print_env_variable:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout 
+  #     - run:
+  #         name: "print env variable"
+  #         command: echo $MY_ENV_2
   
-  save_hello_world_output:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout 
-      - run:
-          name: "save hello world output"
-          command: echo "hello world" > output.txt
-      - persist_to_workspace:
-          root: .
-          paths:
-              - ./output.txt
+  # save_hello_world_output:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout 
+  #     - run:
+  #         name: "save hello world output"
+  #         command: echo "hello world" > output.txt
+  #     - persist_to_workspace:
+  #         root: .
+  #         paths:
+  #             - ./output.txt
 
-  print_output_file:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout 
-      - attach_workspace:
-          at: .
-      - run:
-          name: "print output file"
-          command: cat output.txt
+  # print_output_file:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout 
+  #     - attach_workspace:
+  #         at: .
+  #     - run:
+  #         name: "print output file"
+  #         command: cat output.txt
 
-  pipeline_id:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout 
-      - print_pipeline_id:
-          to: $CIRCLE_WORKFLOW_ID
+  # pipeline_id:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout 
+  #     - print_pipeline_id:
+  #         to: $CIRCLE_WORKFLOW_ID
   
-  divide_by_zero:
+  # No_such_file_or_directory:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout 
+  #     - run:
+  #         name: "No such file or directory"
+  #         command: 1/0
+  #     - run:
+  #         name: "when fail"
+  #         command: echo "FAIL MATE"
+  #         when: on_fail
+  
+  # aws_all_instance_public_ip:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout 
+  #     - run: 
+  #       name: "create inventory file"
+  #       command: echo "[all]" > inventory
+  #     - run:
+  #       name: "print all instance ip to file"
+  #       command: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory
+
+  create_infrastructure:
     docker:
-      - image: cimg/base:stable
+      - image: amazon/aws-cli
     steps:
-      - checkout 
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "a5:52:23:78:d5:66:2b:54:b1:a1:5e:fd:b6:b0:a8:31"
       - run:
-          name: "divide by zero"
-          command: 1/0
+          name: Ensure backend infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file template.yml \
+              --stack-name my-stack
+  
+  configure_infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["06:7c:db:71:49:2f:03:36:60:08:d2:fd:33:6f:17:d3"] # You can get this ID in the section where you registered the SSH Key
       - run:
-          name: "when fail"
-          command: echo "FAIL MATE"
-          when: on_fail
-      
+          name: Install dependencies
+          command: |
+            apk add --update ansible # install the dependencies needed for your playbook
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory.txt playbook.yml
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   version: 2
-  say-hello-workflow:
+  aws-ci-cd:
     jobs:
-      - pipeline_id 
-      - say-hello
-      - print_hello:
-          requires:
-          - say-hello
-      - print_world
-      - print_env_variable
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-          - save_hello_world_output
-      - divide_by_zero
+      # - pipeline_id 
+      # - say-hello
+      # - print_hello:
+      #     requires:
+      #     - say-hello
+      # - print_world
+      # - print_env_variable
+      # - save_hello_world_output
+      # - print_output_file:
+      #     requires:
+      #     - save_hello_world_output
+      # - No_such_file_or_directory
+      # - aws_all_instance_public_ip
+      - create_infrastructure
+      - configure_infrastructure
